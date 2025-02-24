@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Word Count</h1>
+
+    <!-- Form to take sentence input -->
+    <form id="wordForm">
+        <label for="sentence">Enter a sentence:</label>
+        <input type="text" id="sentence" placeholder="Type a sentence here">
+        <button type="submit">Count Words</button>
+    </form>
+
+    <h2>Word Count:</h2>
+    <p id="result"></p>
+
+    <script>
+        // Function to count words in a sentence
+        function countWords(sentence) {
+            const words = sentence.trim().split(/\s+/);
+            return words.length; // Return the number of words
+        }
+
+        // Handle form submission
+        document.getElementById("wordForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+            
+    
+            const sentence = document.getElementById("sentence").value;
+
+            const wordCount = countWords(sentence);
+            document.getElementById("result").textContent = `There are ${wordCount} words in your sentence.`;
+        });
+    </script>
+
+</body>
+</html>

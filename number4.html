@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Convert 12-hour Time to 24-hour Time</h1>
+    
+    <!-- Form for user input -->
+    <form id="timeForm">
+        <label for="time12hr">Enter time in 12-hour format (e.g., 03:30 PM):</label>
+        <input type="text" id="time12hr" placeholder="e.g. 02:30 PM">
+        <button type="submit">Convert</button>
+    </form>
+    
+    <h2>Converted 24-hour format:</h2>
+    <p id="result"></p>
+
+    <script>
+        // Function to convert 12-hour format to 24-hour format
+        function convertTo24Hour(time12hr) {
+            let [time, period] = time12hr.split(' '); 
+            let [hours, minutes] = time.split(':'); 
+
+            hours = parseInt(hours); 
+            minutes = parseInt(minutes); 
+
+            if (period.toUpperCase() === "PM" && hours !== 12) {
+                hours += 12; // Add 12 hours if PM and hours is not 12
+            } else if (period.toUpperCase() === "AM" && hours === 12) {
+                hours = 0; // If AM and hours is 12, set to 0
+            }
+
+            let formattedHours = hours < 10 ? '0' + hours : hours;
+            let formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+
+            return `${formattedHours}:${formattedMinutes}`;
+        }
+
+        // Handle form submission
+        document.getElementById("timeForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+        
+            let time12hr = document.getElementById("time12hr").value;
+
+            let result = convertTo24Hour(time12hr);
+            document.getElementById("result").textContent = result;
+        });
+    </script>
+
+</body>
+</html>
